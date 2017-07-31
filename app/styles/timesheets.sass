@@ -1,0 +1,143 @@
+.start-time
+    @extend .text-success
+    
+.end-time
+    @extend .text-danger
+.panel
+    border-radius: 8px
+    .panel-heading
+        border-radius: 7px 7px 0 0
+.strikethrough
+    text-decoration: line-through
+    color: red
+.employee-timesheet
+    font-size: 14px    
+    .panel
+        margin-top: 18px
+        margin-bottom: 12px
+        padding-bottom: 0
+        .panel-body
+            padding-bottom: 0
+            
+        
+    .employee-name
+        font-size: 18px
+        font-weight: bold
+        
+    .col-xs-one-seventh.date-col
+        padding-left: 0
+        padding-right: 0
+        .date
+            cursor: pointer
+        
+    .work-period
+        border-bottom: 1px solid $gray-light
+        cursor: pointer
+
+        margin: 2px 10px 1px 10px
+        &:last-child
+            border-bottom: none
+
+    .start-time
+        margin-top: 2px
+        
+    .total-hours
+        @extend .bg-success
+        border-radius: 0 0 7px 7px
+    
+    .plus-col
+        padding-left: 0
+        padding-top: 6px
+        font-size: 15px
+        color: $brand-primary
+        cursor: pointer
+        &:hover
+            color: black
+.modal#clock-in-modal
+    .col-xs-4:first-child
+        padding-top: 6px
+    .modal-body
+        .row
+            margin: 10px 0 0 10px
+            .timepicker
+                @extend .col-xs-6
+            .datepicker
+                @extend .col-xs-6
+                    
+                   
+.col-xs-one-seventh
+    @extend .col-xs-2
+    width: 14.2857142857143%
+    
+    
+#show-work-period
+    width: 100%
+    @extend label
+    .row
+        margin-bottom: 10px
+        width: 100%
+    .col-xs-9
+        padding-left: 25px
+
+#make-adjustment
+    label
+        padding-top: 7px
+    input[type="checkbox"]
+        margin-top: 8px
+        
+
+.date
+    border-bottom: 1px solid black
+
+#date-picker
+    border-radius: 0
+    &:focus
+        outline: 0
+
+
+.employee-name-sum
+    font-size: 18px
+    font-weight: bold
+    //margin-bottom: 10px
+    
+div.slider.slider-horizontal
+    width: 100%
+    
+#slider-row
+    margin-bottom: 12px
+    
+    #summary-options
+        margin-top: 5px
+    #export-link
+        cursor: pointer
+.employee-summary-card
+    .panel-body
+        padding-bottom: 0
+    .well
+        &:last-child
+            background-color: $gray-lighter
+            font-size: 16px
+            font-weight: bold
+        
+#summary-table
+    .headers
+        font-size: 18px
+        font-weight: bold
+        border-bottom: 1px solid $gray-dark
+    .employee-summary
+        border-bottom: 1px solid $gray-dark
+        padding: 5px
+        &:hover
+            background-color: white
+    .summary-top-row
+        font-size: 16px
+        font-weight: 600
+    .collapse-row
+        border-top: 1px dotted $gray-dark
+        margin: 0
+        .row
+            .col-margin
+                padding-left: 30px
+                font-size: 14px
+
+

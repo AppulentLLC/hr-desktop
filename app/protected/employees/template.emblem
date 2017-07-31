@@ -1,0 +1,37 @@
+#employees-template                            
+    .row
+        if user.hasManagerPrivileges
+            .col-xs-4
+                .list-group#employees-list
+                    =link-to 'protected.employees.new' class='list-group-item text-center' id='add-employee'
+                        span.glyphicon.glyphicon-user
+                        '
+                        | Add employee
+                            
+                    each pagedEmployees as |employee|
+                        =link-to 'protected.employees.detail' employee class='list-group-item'
+                            .row
+                                .col-xs-9.text-left
+                                    employee.fullName
+                                .col-xs-3.text-right
+                                    .badge
+                                        if employee.latestWorkPeriod
+                                            if employee.latestWorkPeriod.endTime
+                                                =badge-tooltip lastDateTime=employee.latestWorkPeriod.endTime status='Out'
+                    
+                                            else
+                                                =badge-tooltip lastDateTime=employee.latestWorkPeriod.startTime status='In'
+                                                
+                                        else
+                                            | New
+                                        
+        #employee-detail-outlet class=user.hasManagerPrivileges:col-xs-8:col-xs-12
+            outlet
+    if user.hasManagerPrivileges       
+        .row
+            .col-xs-4.text-center  
+                =page-numbers content=pagedEmployees
+                
+            
+            
+            

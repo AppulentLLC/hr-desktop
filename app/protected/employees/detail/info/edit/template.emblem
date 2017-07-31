@@ -1,0 +1,6 @@
+if user.hasManagerPrivileges
+    =employee-form employee=model privilege=privilege action='updateEmployee' required=false isEditing=true
+        button.btn.btn-primary type='submit' Save
+else
+    =employee-form employee=model privilege=model.user.privilege action='updateEmployee' required=false readonly=true isEditing=true
+        button.btn.btn-primary type='submit' Save

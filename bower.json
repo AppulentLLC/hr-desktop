@@ -1,0 +1,13 @@
+{
+  "name": "hr-desktop",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-datepicker": "^1.7.1",
+    "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "bootstrap-validator": "^0.11.9",
+    "inputmask": "jquery.inputmask#^3.3.7",
+    "seiyria-bootstrap-slider": "^9.8.1",
+    "papaparse": "^4.3.3"
+  }
+}

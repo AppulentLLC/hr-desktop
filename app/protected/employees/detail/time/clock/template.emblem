@@ -1,0 +1,109 @@
+if user.hasManagerPrivileges
+    .row.btn-width
+        if model.latestWorkPeriod
+            .col-xs-3
+            .col-xs-6
+                if model.latestWorkPeriod.endTime
+                    button.btn.btn-success{action 'open' 'in-modal'} data-toggle='modal' data-target='#clock-in-modal' Clock In
+                else
+                    button.btn.btn-success disabled='disabled' Clock In
+                    
+                '
+                if model.latestWorkPeriod.endTime
+                    button.btn.btn-danger disabled='disabled' Clock Out  
+                else
+                    button.btn.btn-danger{action 'open'} data-toggle='modal' data-target='#clock-out-modal' Clock Out
+                
+                button.btn.btn-primary{action 'open'} data-toggle='modal' data-target='#previous-modal' Record Previous Work
+        else
+            .col-xs-3
+            .col-xs-6
+                button.btn.btn-success{action 'open' } data-toggle='modal' data-target='#clock-in-modal' New Clock In
+
+.modal.fade#clock-in-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            .modal-header.text-center
+                button type='button' class='close' data-dismiss='modal' aria-label='close'
+                    span aria-hidden='true'
+                        | &times;
+
+                h4.modal-title#tools-modal-label
+                    | Clock In
+                    
+            .modal-body.text-center
+                if model.latestWorkPeriod.endTime
+                    .row
+                        ' Last Clock Out :
+                        =moment-format model.latestWorkPeriod.endTime 'YYYY-MM-DD hh:mmA'
+                        hr
+                .row
+                    | Add Clock In
+                .row
+                    =datetime-picker widgetId='in-modal-datetime'
+                
+            .modal-footer
+                button.btn.btn-primary{action 'clock'} Save
+
+.modal.fade#clock-out-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            .modal-header.text-center
+                button type='button' class='close' data-dismiss='modal' aria-label='close'
+                    span aria-hidden='true'
+                        | &times;
+
+                h4.modal-title
+                    | Clock Out
+                    
+            .modal-body.text-center
+                if modalErrorMessage
+                    .alert.alert-danger role="alert"
+                        span.glyphicon.glyphicon-exclamation-sign aria-hidden="true"
+                        span.sr-only Error:
+                        '
+                        modalErrorMessage
+                if model.latestWorkPeriod
+                    .row
+                        ' Last Clock in :
+                        =moment-format model.latestWorkPeriod.startTime 'YYYY-MM-DD hh:mmA'
+                        hr
+                .row
+                    | Add Clock Out
+                .row
+                    =datetime-picker widgetId='out-modal-datetime'
+
+            .modal-footer
+                button.btn.btn-primary{action 'clock'} Save
+
+.modal.fade#previous-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            .modal-header.text-center
+                button type='button' class='close' data-dismiss='modal' aria-label='close'
+                    span aria-hidden='true'
+                        | &times;
+
+                h4.modal-title
+                    | Record Previous Work
+                    
+            .modal-body.text-center
+                if modalErrorMessage
+                    .alert.alert-danger role="alert"
+                        span.glyphicon.glyphicon-exclamation-sign aria-hidden="true"
+                        span.sr-only Error:
+                        '
+                        modalErrorMessage
+                .row.h3
+                    | Start Time
+                .row
+                    =datetime-picker widgetId='start-datetime'
+                
+                .row.h3
+                    | End Time
+                .row
+                    =datetime-picker widgetId='end-datetime'
+
+            .modal-footer
+                button.btn.btn-primary{action 'recordPrevious'} Save
+

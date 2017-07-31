@@ -1,0 +1,2 @@
+div data-toggle='tooltip' data-placement='bottom' title=formattedDateTime status=status
+    | #{status}

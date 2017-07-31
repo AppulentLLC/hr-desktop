@@ -1,0 +1,92 @@
+.modal.fade#days-off-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            .modal-header.text-center
+                button type='button' class='close' data-dismiss='modal' aria-label='close'
+                    span aria-hidden='true'
+                        | &times;
+
+                h4.modal-title#tools-modal-label
+                    | Day Off
+            .modal-body.text-center
+                .row
+                    .col-xs-6
+                        | From
+                    .col-xs-6
+                        | To
+                .row
+                    .col-xs-6
+                        =datetime-picker widgetId='day-off-from-datetime'
+                    .col-xs-6
+                        =datetime-picker widgetId='day-off-to-datetime'     
+                
+
+                if user.hasManagerPrivileges
+                    hr                   
+                    .row
+                        .btn-group data-toggle="buttons"
+                            label.btn.btn-primary class=daysInWeek.Monday:active
+                                = input type="checkbox" checked=daysInWeek.Monday
+                                | Monday
+                            label.btn.btn-primary class=daysInWeek.Tuesday:active
+                                = input type="checkbox" checked=daysInWeek.Tuesday
+                                | Tuesday
+                            label.btn.btn-primary class=daysInWeek.Wednesday:active
+                                = input type="checkbox" checked=daysInWeek.Wednesday
+                                | Wednesday
+                            label.btn.btn-primary class=daysInWeek.Thursday:active
+                                = input type="checkbox" checked=daysInWeek.Thursday
+                                | Thursday
+                            label.btn.btn-primary class=daysInWeek.Friday:active
+                                = input type="checkbox" checked=daysInWeek.Friday 
+                                | Friday
+                    .row
+                        .btn-group data-toggle="buttons"
+                            label.btn.btn-primary class=daysInWeek.Saturday:active
+                                = input type="checkbox" checked=daysInWeek.Saturday 
+                                | Saturday
+                            label.btn.btn-primary class=daysInWeek.Sunday:active
+                                = input type="checkbox" checked=daysInWeek.Sunday 
+                                | Sunday
+                hr
+                .row
+                    .col-xs-2.col-xs-offset-1.text-right
+                        .btn-group data-toggle="buttons"
+                            label.btn.btn-success class=isPaid:active:btn-danger 
+                                =input type="checkbox" checked=isPaid
+                                if isPaid
+                                    | Paid
+                                else
+                                    | Unpaid
+                    .col-xs-2
+                        strong
+                            | Type of Day Off
+                    .col-xs-2.col-xs-offset-2
+                        strong
+                            | Number of Hours
+                    .col-xs-2.text-left
+                        = input type='number' value=hours class='form-control'
+                    
+                hr
+                .row
+                    .col-xs-10.col-xs-offset-1
+                        =x-select value=dayOffType class='form-control' action=(action "selectType") as |xs|
+                            =each-in dayOffTypes as |key value |
+                                xs.option value=key
+                                    value
+                        hr
+                        =textarea value=note class="form-control" rows='2' placeholder="Write Your Note Here"
+                       
+            .modal-footer
+                if user.hasManagerPrivileges
+                    if isViewingAdmin
+                        button.btn.btn-danger#rejectBtn{action 'rejectDays'} data-toggle="tooltip"  class=rejected:disabled 
+                            | Reject
+                            
+                        button.btn.btn-success#saveBtn{action 'saveDays'} data-toggle="tooltip" class=approved:disabled
+                            | Approve
+
+                    else
+                        button.btn.btn-success{action 'saveDays'} Save
+                else
+                    button.btn.btn-primary{action 'requestDaysOff'} Send Request

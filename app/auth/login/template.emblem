@@ -1,0 +1,29 @@
+h1.text-center Appulent HR Login
+#login-form-container.well
+    if loginMessage
+        .alert.alert-danger role="alert"
+            span.glyphicon.glyphicon-exclamation-sign aria-hidden="true"
+            span.sr-only Error:
+            '
+            loginMessage
+    form{action 'authenticate' on='submit'} data-toggle='validator' role='form' autocomplete='on'
+        .form-group        
+            .row
+                .col-xs-4
+                    label for='username' Username
+                .col-xs-8
+                    =input type='text' class='form-control' id='username' value=credentials.username required='required'
+                    .help-block.with-errors
+        .form-group        
+            .row
+                .col-xs-4
+                    label for='password' Password
+                .col-xs-8
+                    =input type='password' class='form-control' id='password' value=credentials.password required='required'
+                    .help-block.with-errors
+                    
+        .form-group
+            .row
+                .col-xs-4.col-xs-offset-8
+                    button.btn.btn-primary type='submit' Login
+                

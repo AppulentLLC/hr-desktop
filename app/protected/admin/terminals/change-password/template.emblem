@@ -1,0 +1,5 @@
+#terminal-well.well.col-xs-12
+    h3.text-center
+        model.username
+    #terminal-component
+       =password-change password=newPassword action='savePassword'

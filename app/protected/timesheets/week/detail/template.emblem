@@ -1,0 +1,137 @@
+.btn-group.btn-group-justified
+    .btn-group
+        button.btn{action 'goToPreviousWeek'}
+            span.glyphicon.glyphicon-chevron-left
+    .btn-group    
+        =date-picker date=date
+        
+    .btn-group
+        button.btn{action 'goToNextWeek'}
+            span.glyphicon.glyphicon-chevron-right
+each groupedWorkPeriods as |employeeGroup|
+    .employee-timesheet
+        .panel.panel-default.text-center
+            .panel-heading
+                .panel-title.employee-name
+                    .row
+                        .col-xs-12
+                            employeeGroup.employee.fullName
+                           
+            .panel-body
+                .row
+                    =each-in employeeGroup.dates as |date info|
+                        .col-xs-one-seventh.date-col
+                            .date{action 'inModal' employeeGroup.employee date} data-toggle='modal' data-target='#clock-in-modal'
+                                =moment-format date 'ddd'
+                                '
+                                =moment-format date 'MM/DD'
+                            
+                            each info.workPeriods as |workPeriod|
+                                .work-period{action 'setCurrentWorkPeriod' workPeriod} data-toggle='modal' data-target='#work-period-modal' class=workPeriod.isDeleted:strikethrough
+                                    .start-time.text-success class=workPeriod.adjustment:bg-info
+                                        =moment-format workPeriod.startTime 'hh:mmA'
+                                    if workPeriod.endTime
+                                        .end-time.text-danger class=workPeriod.clockedOutNextDay:bg-danger
+                                            =moment-format workPeriod.endTime 'hh:mmA'
+                                                
+                                    else
+                                        | None
+
+                            each info.daysOff as |dayOff|
+                                .div class=dayOff.isPaid:text-success:text-warning
+                                    | {{dayOff.typeDisplay}} ({{dayOff.hours}}h)
+                                    
+                            unless info.workPeriods
+                                unless info.daysOff
+                                    div No work      
+                .row.total-hours
+                    strong
+                        ' Total hours:
+                        employeeGroup.totalHours
+
+.modal.fade#work-period-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            with currentWorkPeriod as |workPeriod|
+                .modal-header
+                    button type='button' class='close' data-dismiss='modal' aria-label='close'
+                        span aria-hidden='true'
+                            | &times;
+
+                    h4.modal-title#work-period-modal-label
+                        ` Work Period for:
+                        workPeriod.employee.fullName
+                .modal-body
+                    section#show-work-period
+                        .row
+                            .col-xs-3
+                                | Clocked in
+                            .col-xs-9
+                                time.start-time
+                                    =moment-format workPeriod.startTime 'YYYY-MM-DD hh:mmA'
+                        if workPeriod.endTime
+                            .row
+                                .col-xs-3 class=workPeriod.clockedOutNextDay:text-danger
+                                    | Clocked out
+                                .col-xs-9
+                                    time.end-time 
+                                        =moment-format workPeriod.endTime 'YYYY-MM-DD hh:mmA'
+                        else
+                            if user.hasManagerPrivileges
+                                .row
+                                    .col-xs-3
+                                        | Set End Time
+                                .row
+                                    .col-xs-11.col-xs-offset-1
+                                        =datetime-picker widgetId='clock-out'
+                                .row
+                                    .col-xs-2.col-xs-offset-10
+                                        button.btn.btn-danger{action 'clockOut'} Clock Out
+                            else
+                                .row
+                                    .col-xs-3
+                                        | Clocked out
+                                    .col-xs-9
+                                        | Not clocked out yet
+                                        
+                    section#make-adjustment
+                        form
+                            .row.form-group
+                                .col-xs-3
+                                    label class=workPeriod.adjustment:text-info
+                                        | Adjustment
+                                .col-xs-9    
+                                    = input class='form-control' value=workPeriod.adjustment type='number' placeholder='In minutes'
+                            .row.form-group
+                                .col-xs-3
+                                    label Note
+                                .col-xs-9
+                                    = input class='form-control' value=workPeriod.note
+                            .row.form-group
+                                .col-xs-3
+                                    label Deleted
+                                .col-xs-9
+                                    = input type='checkbox' checked=workPeriod.isDeleted
+                if user.hasManagerPrivileges
+                    .modal-footer
+                        button.btn.btn-primary{action 'updateCurrentWorkPeriod'} Save
+    
+
+.modal.fade#clock-in-modal tabindex='-1' role='dialog'
+    .modal-dialog role='document'
+        .modal-content
+            .modal-header.text-center
+                button type='button' class='close' data-dismiss='modal' aria-label='close'
+                    span aria-hidden='true'
+                        | &times;
+
+                h4.modal-title#tools-modal-label
+                    | Clock In
+            .modal-body.text-center
+                .row
+                    | Add Clock In
+                .row
+                    =datetime-picker widgetId='in-modal-datetime'
+                
+            .modal-footer
+                button.btn.btn-primary{action 'clockIn'} Save

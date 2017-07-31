@@ -1,0 +1,11 @@
+#terminals-template
+    .col-xs-4.text-center
+        .list-group#terminal-list
+            =link-to 'protected.admin.terminals.new' class='list-group-item text-center' id='add-terminal' 
+                | Add Terminal +
+                
+            each privileges as |privilege|
+                =link-to 'protected.admin.terminals.change-password' privilege.user.id class='list-group-item' 
+                    privilege.user.username
+    .col-xs-8#terminal-outlet
+        outlet

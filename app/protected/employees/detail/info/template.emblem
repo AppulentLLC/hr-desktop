@@ -1,0 +1,89 @@
+#info-template
+    with model as |employee|
+        unless isEditing
+            .row
+                .col-xs-3
+                    strong
+                        | Employee ID
+                .col-xs-9
+                    employee.id
+            .row
+                .col-xs-3
+                    strong
+                        | Payroll ID
+                .col-xs-9
+                    employee.payrollId
+            .row
+                .col-xs-3
+                    strong
+                        | First name
+                .col-xs-9
+                    employee.firstName
+
+            .row
+                .col-xs-3
+                    strong
+                        | Last name
+                .col-xs-9
+                    employee.lastName
+                    
+            .row
+                .col-xs-3
+                    strong
+                        | SSN
+                .col-xs-9
+                    employee.ssn
+               
+            .row
+                .col-xs-3
+                    strong
+                        | Primary phone
+                .col-xs-9
+                    employee.primaryPhone
+                
+            .row
+                .col-xs-3
+                    strong
+                        | Secondary phone
+                .col-xs-9
+                    employee.secondaryPhone
+                
+            .row
+                .col-xs-3
+                    strong
+                        | Street address
+                .col-xs-9
+                    employee.addressStreet
+            .row
+                .col-xs-3
+                    strong
+                        | Apt, Suite, etc.
+                .col-xs-9
+                    employee.addressSecondary
+            .row
+                .col-xs-3
+                    strong
+                        | City
+                .col-xs-9
+                    employee.city
+            .row
+                .col-xs-3
+                    strong
+                        | State
+                .col-xs-9
+                    employee.stateDisplay
+            .row
+                .col-xs-3
+                    strong
+                        | Postal code
+                .col-xs-9
+                    employee.postalCode
+            .row
+                .col-xs-3
+                    strong
+                        | Currently employed
+                .col-xs-9
+                    employee.isActive
+            if canEdit
+                button.btn{action 'editEmployee'}: | Edit
+outlet

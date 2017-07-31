@@ -1,0 +1,3 @@
+.well#new-employee-well
+    =employee-form employee=newEmployee privilege=newPrivilege action='saveEmployee' stateRequired='required'
+        button.btn.btn-primary type='submit' Save

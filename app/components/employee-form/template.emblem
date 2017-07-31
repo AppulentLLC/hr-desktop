@@ -1,0 +1,121 @@
+if errorMessage
+    .alert.alert-danger role="alert"
+        span.glyphicon.glyphicon-exclamation-sign aria-hidden="true"
+        span.sr-only Error:
+        '
+        errorMessage
+form data-toggle='validator' role='form' id='employee-form'
+    .form-group
+        .row
+            .col-xs-4
+                label: | Payroll ID
+            .col-xs-8
+                =input type='text' class='form-control' value=employee.payrollId
+                .help-block.with-errors
+    .form-group        
+        .row
+            .col-xs-4
+                label: | First Name
+            .col-xs-8
+                =input type='text' class='form-control' id='firstName' value=employee.firstName required='required' readonly=restricted
+                .help-block.with-errors
+    .form-group
+        .row
+            .col-xs-4
+                label: | Last name
+            .col-xs-8
+                =input class='form-control has-feedback' value=employee.lastName required='required' readonly=restricted
+                .help-block.with-errors
+                
+    .form-group
+        .row
+            .col-xs-4
+                label: | SS Number
+            .col-xs-8
+                =input id='ssn-input' class='form-control has-feedback' value=employee.ssn readonly=restricted
+                .help-block.with-errors
+                
+    .form-group
+        .row
+            .col-xs-4
+                label: | Primary phone
+            .col-xs-8
+                =input type='tel' class='form-control phone-input' id='phone-1' value=employee.primaryPhone required='required'
+                .help-block.with-errors
+    .form-group
+        .row
+            .col-xs-4
+                label: | Secondary phone
+            .col-xs-8
+                =input class='form-control phone-input' id='phone-2' value=employee.secondaryPhone
+                .help-block.with-errors
+                
+    .form-group
+        .row    
+            .col-xs-4
+                label: | Street Address
+            .col-xs-8
+                =input class='form-control' value=employee.addressStreet required='required'
+                .help-block.with-errors
+    .form-group
+        .row    
+            .col-xs-4
+                label: | Apt, Suite, etc.
+            .col-xs-8
+                =input class='form-control' value=employee.addressSecondary
+                
+    .form-group      
+        .row
+            .col-xs-4
+                label: | City
+            .col-xs-8
+                =input class='form-control' value=employee.city required='required'
+                .help-block.with-errors
+    .form-group 
+        .row
+            .col-xs-4
+                label: | State
+            .col-xs-8 
+                =x-select value=employee.state class='form-control' required=stateRequired action=(action "selectState") as |xs|
+                    each states as |state|
+                        xs.option value=state.value
+                            state.name
+                .help-block.with-errors
+    .form-group
+        .row
+            .col-xs-4
+                label: | Postal code
+            .col-xs-8
+                =input pattern='^[0-9]*$' class='form-control' value=employee.postalCode required='required'
+                .help-block.with-errors
+    
+    if user.hasManagerPrivileges               
+        .form-group
+            .row     
+                .col-xs-4
+                    label Currently employed
+                .col-xs-8
+                    .checkbox
+                        =input type='checkbox' checked=employee.isActive
+    
+    if user.hasAdminPrivileges                    
+        .form-group
+            .row
+                .col-xs-4
+                    label Privileges
+                .col-xs-8
+                    .btn-group.btn-group-justified#permission role="group" data-toggle="buttons-radio"
+                        .btn-group
+                            button.btn.btn-default type="button" data-toggle="button" class=employee.user.isEmployee:active Employee
+                        .btn-group
+                            button.btn.btn-default type="button" data-toggle="button" class=employee.user.isHrManager:active Manager
+                        .btn-group class=user.isGlobalAdmin::hidden
+                            button.btn.btn-default type="button" data-toggle="button" class=employee.user.isHrAdmin:active Admin
+    
+    .form-group
+        .row
+            .col-xs-4
+            .col-xs-8
+                yield
+
+            

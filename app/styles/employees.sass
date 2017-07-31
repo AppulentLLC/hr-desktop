@@ -1,0 +1,123 @@
+#employees-template
+    #add-employee
+        background-color: $brand-success
+        border: $brand-success
+        color: white
+        &.active
+            background-color: darken($brand-success, 10%)
+    #employees-list
+        margin-right: 0
+        .active
+            font-weight: bold
+            .badge
+                background-color: white
+                color: $gray
+        .badge
+            font-size: 10px
+            padding: 2px 4px
+            width: 35px
+        .tooltip.bottom > .tooltip-inner
+
+    #employee-form
+        .has-error
+            color: red
+        label
+            margin-top: 8px
+        input[type='checkbox']
+            margin: 0 8px
+        button
+            width: 98%
+            margin: 0 5px
+    #page-numbers
+        margin: 0 auto
+
+#employee-detail-outlet
+    padding-left: 0px
+    #employee-detail-template
+        margin-left: 15px
+        #head-name-em
+            margin-top: 0px
+            background-color: $gray-light
+            padding: 7px 3px
+            margin-right: 1px
+            border-radius: 4px
+        li.ember-view.active
+            font-weight: bold
+        #head-list-em
+            //margin-right: 15px
+            border: none
+        ul.nav
+            a
+                color: $gray-darker
+                &:active
+                    background-color: none
+        .well
+            margin-right: 15px
+            
+            
+        .btn-width
+            button
+                margin-top: 8px
+                width: 100%    
+        //width: 100%
+        #info-template
+            .row
+                padding: 5px 0
+                &:nth-child(odd)
+                    background-color: $gray-lighter
+            button
+                margin-top: 8px
+                width: 100%
+        #edit-employee-form
+            label
+                padding-top: 6px
+            input[type='checkbox']
+                margin: 0 12px
+            button
+                margin-top: 8px
+                width: 100%
+        .table-hover
+            tr
+                &:hover
+                    background-color: white
+        #timesheet-employee-tab
+            
+            #grid-header-em
+                padding: 5px
+                font-size: 15px
+                font-weight: 500
+                text-align: center
+                background-color: #7d7d7d
+                border-top-left-radius: 4px
+                border-top-right-radius: 4px
+            #timeclock-grid-em
+                border: 1px solid #ddd
+                text-align: center
+            #grid-starttime-em
+                background-color: #9BF7B0
+            #grid-endtime-em
+                background-color: #FF867E
+            #else-time
+                background-color: $brand-danger
+                color: white
+                margin-top: 20px
+                font-weight: bold
+                border-radius: 4px
+                padding: 5px
+                
+        #password-form
+            label
+                padding-top: 8px
+        #change-password-else
+            margin: 11px 20px 0 0
+        .modal
+            .col-xs-4:first-child
+                padding-top: 6px
+            .modal-body
+                .row
+                    margin: 10px 0 0 10px
+                    .timepicker
+                        @extend .col-xs-6
+                    .datepicker
+                        @extend .col-xs-6
+                        

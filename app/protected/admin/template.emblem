@@ -1,0 +1,30 @@
+if user.hasAdminPrivileges
+    #admin-page
+        if isOnMainPage
+            .col-xs-6.col-xs-offset-3
+                .well
+                    .btn-group.btn-group-justified role="group" 
+                        .btn-group
+                            =link-to 'protected.admin.settings' class='btn btn-primary btn-with-margin' 
+                                span.glyphicon.glyphicon-cog
+                                '
+                                | Settings
+                                
+                    .btn-group.btn-group-justified role="group" 
+                        .btn-group
+                            =link-to 'protected.admin.terminals' class='btn btn-primary btn-with-margin' 
+                                span.glyphicon.glyphicon-phone
+                                '
+                                | Terminals
+                    
+                    .btn-group.btn-group-justified role="group" 
+                        .btn-group
+                            =link-to 'protected.admin.days-off-requests' class='btn btn-primary btn-with-margin'
+                                span.glyphicon.glyphicon-leaf 
+                                '
+                                | Days Off Requests
+        outlet
+
+else
+    h2.text-center.text-danger
+        | Access Denied

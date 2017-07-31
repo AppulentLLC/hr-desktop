@@ -1,0 +1,49 @@
+if model
+    .row.text-right
+        .col-xs-1.col-xs-offset-11
+            a href=false
+                span.glyphicon.glyphicon-plus data-toggle='modal' data-target='#days-off-modal'
+                    
+    .row
+        .table-responsive
+            table.table.table-hover
+                thead
+                    tr
+                        th
+                            | Date
+                        th
+                            | Hours
+                        th
+                            | Type
+                        th
+                            | Is Paid
+                tbody
+                    each model as |timeOff|
+                        tr
+                            td
+                                timeOff.utcDate
+                            td
+                                timeOff.hours
+                            td
+                                timeOff.typeDisplay
+                            td
+                                span.glyphicon class=timeOff.isPaid:glyphicon-ok:glyphicon-remove class=timeOff.isPaid:text-success:text-danger
+        
+    .row.text-center
+        =page-numbers content=model
+else
+    .row.alert.alert-danger.text-center
+        span.glyphicon.glyphicon-exclamation-sign
+        '
+        | No days off
+    .row.text-center
+        if user.hasManagerPrivileges
+            | Add Days Off
+        else
+            | Request Days Off
+        '
+        a href=false
+            span.glyphicon.glyphicon-plus data-toggle='modal' data-target='#days-off-modal'
+
+        
+=days-off isViewingAdmin=isViewingAdmin requestData=requestData action='resetModel'

@@ -1,0 +1,40 @@
+if model                   
+    .row
+        .table-responsive
+            table.table.table-hover
+                thead
+                    tr
+                        th
+                            | Start Date
+                        th
+                            | End Date
+                        th
+                            | Request Type
+                        th
+                            | Status
+                        th
+                            | seen
+                tbody
+                    each model as |request|
+                        tr
+                            td
+                                request.startDate
+                            td
+                                request.endDate
+                            td
+                                request.typeDisplay
+                            td
+                                request.status
+                            td
+                                span.glyphicon class=request.seen:glyphicon-ok:glyphicon-remove class=request.seen:text-success:text-danger
+        
+    .row.text-center
+        =page-numbers content=model
+else
+    .row.alert.alert-danger.text-center
+        span.glyphicon.glyphicon-exclamation-sign
+        '
+        | User didn't request any days
+    
+        
+=days-off isViewingAdmin=isViewingAdmin

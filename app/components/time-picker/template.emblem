@@ -1,0 +1,1 @@
+input id='timepicker' type='text' class='time ui-timepicker-input' autocomplete='off' value=time

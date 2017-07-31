@@ -1,0 +1,31 @@
+.table-responsive
+    table.table.table-hover
+        thead
+            tr
+                th Employee
+                th Request Type
+                th Start Date
+                th End Date
+                th Paid
+                th Note
+                th Status
+        tbody
+            each model as |request|
+                tr{action 'openRequest' request }
+                    td 
+                        request.employee.fullName
+                    td
+                        request.typeDisplay
+                    td
+                        request.startDate
+                    td
+                        request.endDate
+                    td
+                        span.glyphicon class={request.isPaid:glyphicon-ok:glyphicon-remove request.isPaid:text-success:text-danger}
+                    td#note-cell
+                        request.note
+                    td 
+                        request.status
+
+
+=days-off requestData=currentRequest unseenRequests=unseenRequests isViewingAdmin=isViewingAdmin

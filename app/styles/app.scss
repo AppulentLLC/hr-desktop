@@ -1,0 +1,24 @@
+
+@import '../../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+@import 'application.sass';
+@import 'employees.sass';
+@import 'timesheets.sass';
+@import 'admin.sass';
+@import 'media.sass';
+
+
+
+$grid-float-breakpoint: 500px;
+
+body {       
+    background-color: $gray-lighter;
+}
+
+//@font-face {
+    //font-family: 'Glyphicons Halflings';
+    //src: url('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
+    //src: url('/fonts/bootstrap/glyphicons-halflings-regular.ttf');
+    //src: url('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf');
+    
+//}

@@ -1,0 +1,4 @@
+#add-terminal-template.well
+    .btn-group.btn-group-justified
+        .btn-group
+            button.btn.btn-primary{action 'addTerminal'} Add Terminal

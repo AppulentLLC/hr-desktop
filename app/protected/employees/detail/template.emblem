@@ -1,0 +1,68 @@
+#employee-detail-template
+    .row#head-name-em.h3.text-center
+        =model.fullName
+    
+    .row
+        ul.nav.nav-tabs#head-list-em
+            =link-to 'protected.employees.detail.info' tagName='li' href='false' role='presentation'
+                a href='protected/employees/{{model.id}}/info'
+                    | Info
+            
+            if user.hasManagerPrivileges       
+                =link-to 'protected.employees.detail.time' eventName='never' tagName='li'
+                    a.dropdown-toggle data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' 
+                        | Time 
+                        span.caret
+                        
+                    ul.dropdown-menu
+                        =link-to 'protected.employees.detail.time.clock' tagName='li' href=false
+                            a href='protected/employees/{{model.id}}/time/clock'
+                                span.glyphicon.glyphicon-dashboard
+                                '
+                                | Clock
+                        li.divider role='separator'
+                        =link-to 'protected.employees.detail.time.sheet' tagName='li' href='false'
+                            a href='protected/employees/{{model.id}}/time/sheet'
+                                span.glyphicon.glyphicon-list-alt
+                                '
+                                | Sheet
+                
+            =link-to 'protected.employees.detail.days-off' eventName='never' tagName='li'
+                a.dropdown-toggle data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' 
+                    | Days Off
+                    '
+                    span.caret
+                    
+                ul.dropdown-menu
+                        =link-to 'protected.employees.detail.days-off.requests' tagName='li' href=false
+                            a href='protected/employees/{{model.id}}/days-off/requests'
+                                span.glyphicon.glyphicon-share
+                                '
+                                | Requested
+                        li.divider role='separator'
+                        =link-to 'protected.employees.detail.days-off.granted' tagName='li' href='false'
+                            a href='protected/employees/{{model.id}}/days-off/granted'
+                                span.glyphicon.glyphicon-check
+                                '
+                                | Granted
+                    
+                
+            if user.hasManagerPrivileges
+                =link-to 'protected.employees.detail.user' eventName='never' tagName='li' class='navbar-right' id='user-nav'
+                    if canEdit
+                        a.dropdown-toggle data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' 
+                            model.user.username
+                            span.caret
+                            
+                        ul.dropdown-menu
+                            =link-to 'protected.employees.detail.user.change-password' tagName='li' href=false
+                                a href='protected/employees/{{model.id}}/time/clock'
+                                    span.glyphicon.glyphicon-lock
+                                    '
+                                    | Change Password
+                    else
+                        #change-password-else
+                            model.user.username
+    .row
+        .well
+            outlet

@@ -1,0 +1,37 @@
+.well.col-xs-6.col-xs-offset-3
+    if alert
+        .alert.alert-success
+            span.glyphicon.glyphicon-saved
+            '
+            alert  
+    form data-toggle='validator' role='form' id='settings-form'
+        .from-group
+            .row
+                .col-xs-4
+                    label: | Summary Headline
+                .col-xs-8
+                    =textarea type='text' value=user.userSetting.summaryText class='form-control'
+
+        .from-group
+            .row
+                .col-xs-4
+                    label: | Weeks in Summary
+                .col-xs-8
+                    =x-select value=user.userSetting.summaryWeeks class='form-control' ction=(action "selectSummery") as |xs|
+                        each days as |day|
+                            xs.option value=day.value
+                                day.name
+        
+        .from-group
+            .row
+                .col-xs-4
+                    label: | Default View for Summary Sheet
+                .col-xs-8
+                    =x-select value=user.userSetting.summaryView class='form-control' ction=(action "selectSummaryView") as |xs|
+                        each views as |summaryView|
+                            xs.option value=summaryView.value
+                                summaryView.name    
+        .form-group
+            .row                  
+                .col-xs-2.col-xs-offset-10
+                    button.btn.btn-success{action 'saveSettings'} Save

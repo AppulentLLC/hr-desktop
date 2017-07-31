@@ -1,0 +1,22 @@
+form.form-horizontal data-toggle='validator' role='form' autocomplete='off' id='password-form'
+    .form-group        
+        .col-xs-4
+            label for='username' New Password
+        .col-xs-8
+            =input type='password' class='form-control' id='newPassword' required='required' value=password 
+            .help-block.with-errors
+    .form-group        
+        .col-xs-4
+            label for='NewPasswordConfirm' Confirm Password
+        .col-xs-8
+            input type='password' class='form-control' id='newPasswordConfirm' required='required' data-match="#newPassword" data-match-error="Whoops, these don't match"
+            .help-block.with-errors
+                
+    .form-group
+        .col-xs-2.col-xs-offset-4
+            button.btn.btn-primary type='submit' Save
+        .col-xs-6
+            if loginMessage
+                .text-danger
+                    loginMessage
+        

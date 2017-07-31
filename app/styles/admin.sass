@@ -1,0 +1,60 @@
+#admin-page
+    .btn-with-margin
+        margin: 5px 0
+    #settings-form
+        .row
+            margin: 5px
+        label
+            margin-top: 6px
+    #terminals-template
+        #add-terminal
+            background-color: $brand-success
+            border: $brand-success
+            color: white
+            &.active
+                background-color: darken($brand-success, 10%)
+       
+        #terminal-list
+            margin-right: 0
+            .active
+                font-weight: bold
+                .badge
+                    background-color: white
+                    color: $gray
+                    
+        .well
+            width: 50%
+            margin: 5px auto
+
+        #terminal-outlet
+            #add-terminal-template
+                width: 100%
+                
+            #terminal-well
+                margin: 0
+                width: 100%
+                padding: 0 10px
+                h3
+                    border-radius: 6px
+                    background-color: $gray-light
+                    padding: 10px 0
+                    margin: 20px 10px 30px 10px
+            
+            #terminal-component
+                margin: 0 20px
+    table
+        tbody
+            tr         
+                #note-cell
+                    width: 450px
+    .modal
+        .col-xs-4:first-child
+            padding-top: 6px
+        .modal-body
+            .row
+                margin: 10px 0 0 10px
+                .timepicker
+                    @extend .col-xs-6
+                .datepicker
+                    @extend .col-xs-6
+                        

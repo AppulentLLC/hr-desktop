@@ -1,0 +1,104 @@
+.row.hidden-print#slider-row
+    .col-xs-1#summary-options
+        span.glyphicon.glyphicon-option-vertical.dropdown-toggle data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' 
+        ul.dropdown-menu aria-labelledby="dropdownMenu1"
+            li  
+                a href=false
+                    =export-to-csv summariesExport=summariesExport
+            li  
+                a href='cardView' click='showCardView'
+                    span.glyphicon.glyphicon-credit-card
+                    '
+                    | Card View
+            li  
+                a href='tableView' click='showTableView'
+                    span.glyphicon.glyphicon-list-alt
+                    '
+                    | Table View
+    .col-xs-10
+        =summary-slider
+.row.visible-print-block
+    .col-xs-4.col-xs-offset-4.text-center
+        .h1 
+            user.userSetting.summaryText
+
+.row#timesheets-summaries class=summaryView:hidden:show
+    each employeeSummaries as |employeeSummary|
+    
+        div class=user.hasManagerPrivileges:col-xs-6:col-xs-12
+            .panel.panel-default.employee-summary-card.text-center
+                .panel-heading   
+                    .panel-title.employee-name-sum
+                        employeeSummary.employee.fullName
+                .panel-body  
+                    each employeeSummary.weeks as |week|
+                        .well
+                            .row
+                                .col-xs-6
+                                    week.start
+                                    '
+                                    span.glyphicon.glyphicon-arrow-right
+                                    '
+                                    =moment-format-add week.start 6 'days'
+                                .col-xs-6
+                                    week.total
+                                    '
+                                    | hours
+                    .well
+                        .row
+                            .col-xs-6
+                                | Overtime
+
+                            .col-xs-6
+                                | Grand Total
+                        .row
+                            .col-xs-6
+                                employeeSummary.overtime
+                            .col-xs-6
+                                employeeSummary.grandTotal
+                                
+#timesheet-table class=summaryView:show:hidden
+    =timesheet-summary-table employeeSummaries=employeeSummaries
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+

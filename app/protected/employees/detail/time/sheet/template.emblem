@@ -1,0 +1,30 @@
+if model
+    .row
+        .table-responsive#timesheet-table
+            table.table.table-hover
+                thead
+                    tr
+                        th 
+                            | Start  time
+                        th
+                            | End Time
+                        th
+                            | Hours Worked
+                tbody                
+                    each model as |workPeriod|
+                        tr class=workPeriod.isDeleted:strikethrough
+                            td
+                                =moment-format workPeriod.startTime 'YYYY/MM/DD hh:mmA'
+                            td
+                                if workPeriod.endTime
+                                    =moment-format workPeriod.endTime 'YYYY/MM/DD hh:mmA'
+                                else
+                                    | None
+                            td
+                                workPeriod.hoursWorked
+    .row.text-center       
+        =page-numbers content=model
+
+else
+    p#else-time
+        | No work periods for this employee
